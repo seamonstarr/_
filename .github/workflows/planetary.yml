@@ -21,10 +21,9 @@ jobs:
         run: cargo build --all --release && strip target/release/test-deply && mv target/release/test-deply target/release/test-deply_amd64
 
       - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v3
         with:
-          files: |
+          path: |
             target/release/test-deply_amd64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,10 +46,9 @@ jobs:
         run: cargo build --all --release
 
       - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v3
         with:
-          files: target/release/test-deply.exe
+          path: target/release/test-deply.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -73,10 +71,9 @@ jobs:
         run: cargo build --all --release && strip target/release/test-deply && mv target/release/test-deply target/release/test-deply_darwin
 
       - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v3
         with:
-          files: |
+          path: |
             target/release/test-deply_darwin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
